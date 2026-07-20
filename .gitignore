@@ -1,0 +1,22 @@
+# Environment
+.env
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Database
+*.db
+
+# Large datasets
+data/
+data.zip
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

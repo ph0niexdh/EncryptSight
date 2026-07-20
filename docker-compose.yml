@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: encryptsight
+      POSTGRES_USER: encryptsight
+      POSTGRES_PASSWORD: encryptsight
+    volumes: [postgres_data:/var/lib/postgresql/data]
+  backend:
+    build: ./backend
+    environment:
+      DATABASE_URL: postgresql+psycopg://encryptsight:encryptsight@postgres:5432/encryptsight
+    ports: ["8000:8000"]
+    depends_on: [postgres]
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_BASE_URL: http://localhost:8000
+    ports: ["5173:80"]
+    depends_on: [backend]
+volumes:
+  postgres_data:
